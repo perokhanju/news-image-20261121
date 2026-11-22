@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os, shutil
 
-SRC = os.path.join("app", "entry.png")
+SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app", "entry.png")
 
 def main():
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
