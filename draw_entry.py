@@ -20,6 +20,16 @@ def build():
         od.line([(0, y), (tw - 1, y)], fill=(0, 0, 0, alpha))
     img = Image.alpha_composite(img, overlay)
 
+    vignette = Image.new("RGBA", (tw, th), (0, 0, 0, 0))
+    vg = ImageDraw.Draw(vignette)
+    vcx, vcy = tw // 2, th // 2
+    maxr = int(math.hypot(vcx, vcy))
+    inner = maxr // 2
+    for r in range(maxr, inner, -1):
+        a = int(60 * (r - inner) / (maxr - inner))
+        vg.ellipse([vcx - r, vcy - r, vcx + r, vcy + r], fill=(0, 0, 0, a))
+    img = Image.alpha_composite(img, vignette)
+
     draw = ImageDraw.Draw(img)
 
     serif_bold = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"
