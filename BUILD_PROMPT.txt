@@ -1,0 +1,14 @@
+Build a make.fun entry for competition news-image-20261121 in this directory. Deadline is near — work fast, no exploration beyond this file.
+
+Files here: art_raw.png (AI background art, 768x768, menacing robot over fire, no text; 'pollinations.ai' watermark in bottom-right corner), main.py (from previous entry pattern — rewrite for this repo).
+
+Tasks:
+1. Write main.py (stdlib only) that copies app/entry.png to /output/entry.png, creating /output (support MAKEFUN_OUTPUT_DIR env override).
+2. Write draw_entry.py (PIL) that: loads art_raw.png, crops the bottom 60 px (removes the watermark), center-crops/resizes to exactly 1024x1024; adds a dark gradient overlay at the top (alpha ~200 -> 0 over the top 400 px); draws crisp text using DejaVu fonts in /usr/share/fonts/truetype/dejavu/:
+   - Masthead centered top: 'THE WORLD' (DejaVuSerif-Bold ~84px, off-white #F5F1E8)
+   - Under it ~32px amber #FFB84D: 'SATURDAY, NOVEMBER 21, 2026'
+   - Main headline ~54px off-white centered ~y=250, max 2 lines, thin red underline: 'KILLER ROBOT TALKS FAIL'
+   - Second line ~30px: 'UN Geneva talks end with no binding rules — 2 more years of talk'
+   - Bottom banner: semi-transparent black strip (y ~935-1010) with labels ~22px separated by red dots: 'IRAN STRIKES 3 TANKERS  •  CARTEL BOSS 'EL CHAPO ISIDRO' CAUGHT  •  AI STOCKS TUMBLE  •  UN COURT: MYANMAR GENOCIDE' — measure width; shrink to 2 lines if needed. NEVER overflow or clip text (measure with font.getbbox).
+3. Delete any old app/entry.png, run draw_entry.py, verify: PIL loads, 1024x1024, <=1 MiB, then run main.py.
+Print a short summary when done.
